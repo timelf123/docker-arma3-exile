@@ -1,14 +1,14 @@
-FROM alpine:3.4
+FROM alpine:3.5
 
 ENV BUILD_STAMP 2016-06-19T13:09:43+09:30
 RUN apk update
 RUN apk add --no-cache wget unzip build-base bash p7zip
 
-ENV EXILE_SERVER_VERSION 0.9.61
-ENV EXILE_SERVER_URL "http://namalsk.thealtisproject.co.uk/exile/@ExileServer-${EXILE_SERVER_VERSION}.zip"
+ENV EXILE_SERVER_VERSION 1.0.2
+ENV EXILE_SERVER_URL "http://www.exilemod.com/download-all-the-files/@ExileServer-${EXILE_SERVER_VERSION}.zip"
 ENV EXILE_SERVER_FILENAME "@ExileServer-${EXILE_SERVER_VERSION}"
 
-ENV EXILE_CLIENT_VERSION 0.9.61
+ENV EXILE_CLIENT_VERSION 1.0.2
 ENV EXILE_CLIENT_URL "http://cdn.alcdn.co.uk/a3launcher/exile/${EXILE_CLIENT_VERSION}/%40Exile.zip"
 ENV EXILE_CLIENT_FILENAME "@Exile-${EXILE_CLIENT_VERSION}"
 
