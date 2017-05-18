@@ -1,48 +1,48 @@
-FROM alpine:3.4
+FROM alpine:3.5
 
-ENV BUILD_STAMP 2016-06-19T13:09:43+09:30
+ENV BUILD_STAMP 2016-05-15T13:09:43+09:30
 RUN apk update
 RUN apk add --no-cache wget unzip build-base bash p7zip
 
-ENV EXILE_SERVER_VERSION 0.9.61
-ENV EXILE_SERVER_URL "http://namalsk.thealtisproject.co.uk/exile/@ExileServer-${EXILE_SERVER_VERSION}.zip"
+ENV EXILE_SERVER_VERSION 1.0.2
+ENV EXILE_SERVER_URL "http://www.exilemod.com/download-all-the-files/@ExileServer-${EXILE_SERVER_VERSION}.zip"
 ENV EXILE_SERVER_FILENAME "@ExileServer-${EXILE_SERVER_VERSION}"
 
-ENV EXILE_CLIENT_VERSION 0.9.61
-ENV EXILE_CLIENT_URL "http://cdn.alcdn.co.uk/a3launcher/exile/${EXILE_CLIENT_VERSION}/%40Exile.zip"
+ENV EXILE_CLIENT_VERSION 1.0.2
+ENV EXILE_CLIENT_URL "https://cdn.whocaresabout.de/exile/@Exile-${EXILE_CLIENT_VERSION}.zip"
 ENV EXILE_CLIENT_FILENAME "@Exile-${EXILE_CLIENT_VERSION}"
 
 ENV EXILE_EXT2DB_VERSION 71
-ENV EXILE_EXT2DB_URL "https://github.com/ArmaLife/extDB2/releases/download/v${EXILE_EXT2DB_VERSION}/extDB2-v${EXILE_EXT2DB_VERSION}.7z"
+ENV EXILE_EXT2DB_URL "https://github.com/AsYetUntitled/extDB2/releases/download/v${EXILE_EXT2DB_VERSION}/extDB2-v${EXILE_EXT2DB_VERSION}.7z"
 ENV EXILE_EXT2DB_FILENAME "@extDB2"
 
 RUN echo "Fetching Exile Server ${EXILE_SERVER_VERSION}"
 
-ENV BUILD_STAMP 2016-06-19T13:47:06+09:30
+ENV BUILD_STAMP 2017-05-15T13:47:06+09:30
 
 RUN wget "${EXILE_SERVER_URL}" -O "/tmp/${EXILE_SERVER_FILENAME}.zip"
-RUN unzip "/tmp/${EXILE_SERVER_FILENAME}.zip" -d "/tmp/" && \
-	rm -f "/tmp/${EXILE_SERVER_FILENAME}.zip"
+RUN unzip "/tmp/${EXILE_SERVER_FILENAME}.zip" -d "/tmp/" && rm -f "/tmp/${EXILE_SERVER_FILENAME}.zip"
 
 
-ENV BUILD_STAMP 2016-06-19T14:10:26+09:30
+ENV BUILD_STAMP 2016-05-15T14:10:26+09:30
 RUN mkdir /arma3/keys -p
 RUN mkdir /arma3/battleye -p
 RUN mkdir /arma3/mpmissions -p
 
-WORKDIR /tmp/$EXILE_SERVER_FILENAME/Arma\ 3\ Server
-
-RUN	mv ./\@ExileServer /arma3/\@exileserver && \
+# WORKDIR /tmp/$EXILE_SERVER_FILENAME/Arma\ 3\ Server
+WORKDIR /tmp/Arma\ 3\ Server/
+RUN ls -la
+RUN	mv ./@ExileServer /arma3/@exileserver && \
 	mv ./battleye/* /arma3/battleye/ && \
 	mv ./keys/* /arma3/keys/ && \
 	mv ./mpmissions/* /arma3/mpmissions/ && \
 	mv ./tbbmalloc.dll /arma3/;
+RUN ls -la /arma3/keys
 
-
-ENV BUILD_STAMP 2016-06-19T14:11:18+09:30
+ENV BUILD_STAMP 2016-05-15T14:11:18+09:30
 RUN mkdir /docker-entrypoint-initdb.d/
-WORKDIR /tmp/$EXILE_SERVER_FILENAME/MySQL
-RUN mv ./* /docker-entrypoint-initdb.d/
+WORKDIR /tmp/MySQL
+RUN mv ./exile.sql /docker-entrypoint-initdb.d/
 
 # RUN rm -rf "/tmp/${EXILE_SERVER_FILENAME}"
 

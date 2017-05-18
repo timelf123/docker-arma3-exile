@@ -1,2 +1,2 @@
 exile:
-	docker build -t airtonix/arma3-exile:0.9.61
+	docker build -t timelf123/arma3-exile:1.0.2
