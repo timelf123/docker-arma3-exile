@@ -30,7 +30,7 @@ RUN mkdir /arma3/keys -p
 RUN mkdir /arma3/battleye -p
 RUN mkdir /arma3/mpmissions -p
 
-WORKDIR /tmp/$EXILE_SERVER_FILENAME/Arma\ 3\ Server
+WORKDIR /tmp/Arma\ 3\ Server
 
 RUN	mv ./\@ExileServer /arma3/\@exileserver && \
 	mv ./battleye/* /arma3/battleye/ && \
@@ -41,7 +41,7 @@ RUN	mv ./\@ExileServer /arma3/\@exileserver && \
 
 ENV BUILD_STAMP 2016-06-19T14:11:18+09:30
 RUN mkdir /docker-entrypoint-initdb.d/
-WORKDIR /tmp/$EXILE_SERVER_FILENAME/MySQL
+WORKDIR /tmp/MySQL
 RUN mv ./* /docker-entrypoint-initdb.d/
 
 # RUN rm -rf "/tmp/${EXILE_SERVER_FILENAME}"
