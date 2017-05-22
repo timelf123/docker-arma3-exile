@@ -1,32 +1,27 @@
-store:
-  build: ./exile
-  image: timelf123/arma3-exile:1.0.2
-  volumes:
-    - ./exile/profiles:/profiles
-    - ./exile/main.cfg:/server/main.cfg
-    - ./exile/basic.cfg:/server/basic.cfg
-    - ./exile/params:/arma3/params
-    - /docker-entrypoint-initdb.d/
-    - /var/lib/mysql
-
 db:
   image: mysql
   environment:
-    MYSQL_ROOT_PASSWORD: StinkyTofu12345
+    MYSQL_ROOT_PASSWORD: CHANGEMEA$AP!
     MYSQL_DATABASE: exile
     MYSQL_USER: exile
     MYSQL_PASSWORD: exile
-  volumes_from:
-    - store
+  volumes:
+    - ./arma3/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
+    - ./arma3/docker-var-mysql:/var/lib/mysql
 
 server:
   image: timelf123/arma3
-  volumes_from:
-    - store
+  volumes:
+    - ./arma3/keys:/arma3/keys
+    - ./arma3/mods:/arma3/mods
+    - ./arma3/mpmissions:/arma3/mpmissions
+    - ./arma3/server:/server
+    - ./params:/arma3/params
+    - ./arma3/profiles:/profiles
   links:
     - db
   ports:
-    - "2302/udp"
-    - "2303/udp"
-    - "2304/udp"
-    - "2305/udp"
+    - "2302:2302/udp"
+    - "2303:2303/udp"
+    - "2304:2304/udp"
+    - "2305:2305/udp"

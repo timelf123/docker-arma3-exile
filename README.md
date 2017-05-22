@@ -25,11 +25,13 @@
     $ git clone this repo; cd to this repo;
 ```
 
-2. Create a `credentials` file in `./server/` containing your steam login
+2. Run `./build.sh` to download Exile client/server and set up the shared volumes for MySQL/arma server files
 
 3. Customise the config files:
 ```bash
     $ nano|vi|subl|gedit|notepad ./docker-compose.yml
+
+    arma3/server/*.cfg
 ```
 
 4. build and run the images:
@@ -40,14 +42,14 @@
 
 ## Upgrading
 
-see [#infrastructre] for info about how this project works
+see [#infrastructure] for info about how this project works
 
 - Check and ensure both EXILE_SERVER_URL and EXILE_CLIENT_URL are valid
 - change version numbers and/or urls
 - docker-compose rm server && docker-compose build server && docker-compose up server
 
 
-## Infrastructre
+## Infrastructure
 
 uses docker to automate the creation of required infrastructure and software for an Arma3 Exile Server.
 
@@ -58,10 +60,5 @@ uses docker to automate the creation of required infrastructure and software for
 
 - Database Container
     + database server process.
-    + mounts volumes exposed by database data container.
+    + mounts volumes created by build.sh script.
     + ephemeral, destroy this at will.
-
-- Store Data Container
-    + Provides exile game files
-    + Provides exile  mysql db schema and migrations
-    + leave this running, use backup strategies outlined below.
