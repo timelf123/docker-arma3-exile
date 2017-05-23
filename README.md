@@ -32,6 +32,7 @@
     $ nano|vi|subl|gedit|notepad ./docker-compose.yml
 
     arma3/server/*.cfg
+    params
 ```
 
 4. build and run the images:
