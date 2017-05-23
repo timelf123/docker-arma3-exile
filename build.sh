@@ -54,5 +54,8 @@ echo "Setting up extDB2"
 sed "s/IP = 127.0.0.1/IP = db/g" $BUILD_PATH/mods/@exileserver/extdb-conf.ini
 sed "s/Username = changeme/Username = exile/g" $BUILD_PATH/mods/@exileserver/extdb-conf.ini
 sed "s/Password =/Password = exile/g" $BUILD_PATH/mods/@exileserver/extdb-conf.ini
+echo "lowercasing mods folder"
+cd $BUILD_PATH/mods
+rename 'y/A-Z/a-z/' *
 echo "Finished."
 
