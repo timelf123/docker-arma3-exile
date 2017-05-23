@@ -1,7 +1,7 @@
 -port=2302
 -config=/server/config.cfg
 -cfg=/server/basic.cfg
--name=Exile (1.0.3|1.70)
--mod=mods/@exile
+-name=exile
+-mod=mods/@exile;
 -servermods=mods/@exileserver
 -world=empty

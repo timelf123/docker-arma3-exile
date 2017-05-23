@@ -1,10 +1,11 @@
 db:
   image: mysql
   environment:
-    MYSQL_ROOT_PASSWORD: CHANGEMEA$AP!
+    MYSQL_ROOT_PASSWORD: changethispassw0rd
     MYSQL_DATABASE: exile
     MYSQL_USER: exile
     MYSQL_PASSWORD: exile
+  command: mysqld --sql_mode=""
   volumes:
     - ./arma3/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
     - ./arma3/docker-var-mysql:/var/lib/mysql

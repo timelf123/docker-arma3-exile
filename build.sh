@@ -29,21 +29,30 @@ mv ./@ExileServer/ $BUILD_PATH/mods/@exileserver/ && \
 	mv ./mpmissions/* $BUILD_PATH/mpmissions/ && \
 	mv ./tbbmalloc.dll $BUILD_PATH/
 cp  $BUILD_PATH/mods/@exileserver/*.cfg $BUILD_PATH/server/
+#copy a3bikey until I figure out a better way to do this
+cp $SOURCE_PATH/a3.bikey $BUILD_PATH/keys/
 echo "Making SQL directories"
 mkdir $BUILD_PATH/docker-entrypoint-initdb.d/ -p
 mkdir $BUILD_PATH/docker-var-mysql/ -p
 cd /tmp/MySQL
 mv ./exile.sql $BUILD_PATH/docker-entrypoint-initdb.d/
 rm -rf "/tmp/${EXILE_SERVER_FILENAME}"
+
 echo "Fetching Exile Client ${EXILE_CLIENT_VERSION}"
 wget "${EXILE_CLIENT_URL}" -O "/tmp/${EXILE_CLIENT_FILENAME}.zip"
 unzip "/tmp/${EXILE_CLIENT_FILENAME}.zip" -d "/tmp/${EXILE_CLIENT_FILENAME}"
 ls /tmp/${EXILE_CLIENT_FILENAME}
 mv "/tmp/${EXILE_CLIENT_FILENAME}/@Exile" "$BUILD_PATH/mods/@exile"
+
 echo "Fetching Ext2DB ${EXILE_CLIENT_VERSION}"
 wget "${EXILE_EXT2DB_URL}" --no-check-certificate -O "/tmp/${EXILE_EXT2DB_FILENAME}.7z"
 7z x -o"/tmp/${EXILE_EXT2DB_FILENAME}" "/tmp/${EXILE_EXT2DB_FILENAME}.7z" && \
 	rm -f "/tmp/${EXILE_EXT2DB_FILENAME}.7z"
 cd /tmp/$EXILE_EXT2DB_FILENAME/Linux/$EXILE_EXT2DB_FILENAME
 cp ./extDB2.so $BUILD_PATH/mods/@exileserver/ && rm -rf "/tmp/${EXILE_EXT2DB_FILENAME}"
+echo "Setting up extDB2"
+sed "s/IP = 127.0.0.1/IP = db/g" $BUILD_PATH/mods/@exileserver/extdb-conf.ini
+sed "s/Username = changeme/Username = exile/g" $BUILD_PATH/mods/@exileserver/extdb-conf.ini
+sed "s/Password =/Password = exile/g" $BUILD_PATH/mods/@exileserver/extdb-conf.ini
 echo "Finished."
+
