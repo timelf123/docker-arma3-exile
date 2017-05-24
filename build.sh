@@ -51,9 +51,9 @@ wget "${EXILE_EXT2DB_URL}" --no-check-certificate -O "/tmp/${EXILE_EXT2DB_FILENA
 cd /tmp/$EXILE_EXT2DB_FILENAME/Linux/$EXILE_EXT2DB_FILENAME
 cp ./extDB2.so $BUILD_PATH/mods/@exileserver/ && rm -rf "/tmp/${EXILE_EXT2DB_FILENAME}"
 echo "Setting up extDB2"
-sed "s/IP = 127.0.0.1/IP = db/g" $BUILD_PATH/mods/@exileserver/extdb-conf.ini
-sed "s/Username = changeme/Username = exile/g" $BUILD_PATH/mods/@exileserver/extdb-conf.ini
-sed "s/Password =/Password = exile/g" $BUILD_PATH/mods/@exileserver/extdb-conf.ini
+sed -i -e "s/IP = 127.0.0.1/IP = db/g" $BUILD_PATH/mods/@exileserver/extdb-conf.ini
+sed -i -e "s/Username = changeme/Username = exile/g" $BUILD_PATH/mods/@exileserver/extdb-conf.ini
+sed -i -e "s/Password =/Password = exile/g" $BUILD_PATH/mods/@exileserver/extdb-conf.ini
 echo "lowercasing mods folder"
 cd $BUILD_PATH/mods
 rename 'y/A-Z/a-z/' *
