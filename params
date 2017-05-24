@@ -2,6 +2,6 @@
 -config=/server/config.cfg
 -cfg=/server/basic.cfg
 -name=exile
--mod=mods/@exile;
--servermods=mods/@exileserver
+-mod=mods/@exile
+-servermod=mods/@exileserver
 -world=empty
