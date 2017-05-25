@@ -11,8 +11,9 @@ EXILE_EXT2DB_URL="https://github.com/AsYetUntitled/extDB2/releases/download/v${E
 EXILE_EXT2DB_FILENAME="@extDB2"
 SOURCE_PATH=$PWD
 BUILD_PATH=$PWD/arma3
-echo "clearing out your tmp files and BUILD_PATH/mods. should cache in future"
-rm -rf /tmp/Arma\ 3\ Server/ && rm -rf /tmp/MySQL && rm -rf $BUILD_PATH/mods
+echo "clearing out your previously downloaded exile files"
+rm -rf /tmp/Arma\ 3\ Server/ && rm -rf /tmp/MySQL
+#rm -rf $BUILD_PATH/mods
 echo "Fetching Exile Server ${EXILE_SERVER_VERSION}"
 wget "${EXILE_SERVER_URL}" -O "/tmp/${EXILE_SERVER_FILENAME}.zip"
 unzip "/tmp/${EXILE_SERVER_FILENAME}.zip" -d "/tmp/" && rm -f "/tmp/${EXILE_SERVER_FILENAME}.zip"
@@ -29,8 +30,9 @@ mv ./@ExileServer/ $BUILD_PATH/mods/@exileserver/ && \
 	mv ./mpmissions/* $BUILD_PATH/mpmissions/ && \
 	mv ./tbbmalloc.dll $BUILD_PATH/
 cp  $BUILD_PATH/mods/@exileserver/*.cfg $BUILD_PATH/server/
-#copy a3bikey until I figure out a better way to do this
+#copy a3bikey and beserver.so until I figure out if you can unionfs or merge a docker vol
 cp $SOURCE_PATH/a3.bikey $BUILD_PATH/keys/
+cp $SOURCE_PATH/beserver.so $BUILD_PATH/battleye/beserver.so
 echo "Making SQL directories"
 mkdir $BUILD_PATH/docker-entrypoint-initdb.d/ -p
 mkdir $BUILD_PATH/docker-var-mysql/ -p

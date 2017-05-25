@@ -19,6 +19,7 @@ server:
     - ./arma3/server:/server
     - ./params:/arma3/params
     - ./arma3/profiles:/profiles
+    - ./arma3/battleye:/arma3/battleye
   links:
     - db
   ports:
