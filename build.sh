@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -e
-EXILE_SERVER_VERSION=1.0.3b
+EXILE_SERVER_VERSION=1.0.4
 EXILE_SERVER_URL="http://www.exilemod.com/download-all-the-files/@ExileServer-${EXILE_SERVER_VERSION}.zip"
 EXILE_SERVER_FILENAME="@ExileServer-${EXILE_SERVER_VERSION}"
-EXILE_CLIENT_VERSION=1.0.3
-EXILE_CLIENT_URL="https://cdn.whocaresabout.de/exile/@Exile-${EXILE_CLIENT_VERSION}.zip"
+EXILE_CLIENT_VERSION=1.0.4
+EXILE_CLIENT_URL="http://85.25.202.58/download-all-the-files/@Exile-${EXILE_CLIENT_VERSION}.zip"
 EXILE_CLIENT_FILENAME="@Exile-${EXILE_CLIENT_VERSION}"
 EXILE_EXT2DB_VERSION=71
 EXILE_EXT2DB_URL="https://github.com/AsYetUntitled/extDB2/releases/download/v${EXILE_EXT2DB_VERSION}/extDB2-v${EXILE_EXT2DB_VERSION}.7z"
